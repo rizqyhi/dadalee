@@ -11,9 +11,16 @@
         </div>
 
         @foreach($posts as $post)
-            <x-post :post="$post"></x-post>
+            @if($loop->last && $posts->hasMorePages())
+                <x-post :post="$post"
+                        hx-get="{{ $posts->nextPageUrl() }}"
+                        hx-trigger="revealed"
+                        hx-select=".post"
+                        hx-swap="afterend"
+                ></x-post>
+            @else
+                <x-post :post="$post"></x-post>
+            @endif
         @endforeach
-
-        {{ $posts->render() }}
     </div>
 </x-app-layout>
