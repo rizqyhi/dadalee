@@ -15,7 +15,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" hx-boost="true">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -37,5 +37,12 @@
                 </div>
             </main>
         </div>
+
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        <script>
+            document.body.addEventListener('htmx:configRequest', function(e) {
+                e.detail.headers['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
+            });
+        </script>
     </body>
 </html>
