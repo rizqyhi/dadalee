@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="space-y-4">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <h2 class="mb-2 font-bold text-xl">Post Now!</h2>
-            <form method="POST" action="{{ route('posts.store') }}">
+        <div class="flex bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 space-x-2">
+            <x-gravatar email="{{ auth()->user()->email }}" class="w-10 h-10 rounded-full" />
+            <form method="POST" action="{{ route('posts.store') }}" class="w-full">
                 @csrf
-                <textarea name="content" rows="3" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"></textarea>
+                <textarea name="content" placeholder="How's your day?" rows="3" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"></textarea>
                 <x-input-error :messages="$errors->get('content')" class="mt-2" />
-                <x-primary-button class="mt-4">Post</x-primary-button>
+                <x-primary-button class="mt-4 float-right">Post</x-primary-button>
             </form>
         </div>
 
