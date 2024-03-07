@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('posts', \App\Http\Controllers\PostController::class);
     Route::post('/posts/{post}/likes', \App\Http\Controllers\LikeAction::class)->name('posts.like');
+
+    Route::get('/{user:username}', \App\Http\Controllers\UserProfileAction::class)->name('users.profile');
 });
 
 Route::get('/auth/google', static fn () => Socialite::driver('google')->redirect())->name('auth.google');

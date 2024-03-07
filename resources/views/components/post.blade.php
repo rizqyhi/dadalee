@@ -5,7 +5,7 @@
         <div class="flex items-center space-x-2">
             <x-gravatar email="{{ $post->author->email }}" class="h-10 w-10 rounded-full"/>
             <div>
-                <div class="font-bold">{{ $post->author->name }}</div>
+                <a href="{{ route('users.profile', $post->author->username) }}" class="font-bold">{{ $post->author->name }}</a>
                 <div class="text-sm text-gray-500" title="{{ $post->created_at->format('l, j M Y - H:i') }}">{{ $post->created_at->ago() }}</div>
             </div>
         </div>
