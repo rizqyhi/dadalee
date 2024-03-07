@@ -34,8 +34,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('users.profile', auth()->user()->username)">
+                            {{ __('Me') }}
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Settings') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -66,12 +69,6 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('Home') }}
-            </x-responsive-nav-link>
-        </div>
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
@@ -80,8 +77,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('users.profile', auth()->user()->username)">
+                    {{ __('Me') }}
+                </x-responsive-nav-link>
+
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Settings') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
