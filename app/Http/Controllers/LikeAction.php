@@ -10,6 +10,11 @@ class LikeAction extends Controller
     {
         $post->likers()->toggle(auth()->user());
 
+        if (request()->headers->has('hx-request')) {
+            $post->load(['author'])->loadCount(['replies', 'likers']);
+            return view('components.post', compact('post'));
+        }
+
         return redirect()->back();
     }
 }

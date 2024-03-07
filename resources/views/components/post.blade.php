@@ -1,6 +1,6 @@
 @props(['post'])
 
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 space-y-4">
+<div id="post-{{ $post->id }}" {{ $attributes->merge(['class' => 'post bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 space-y-4']) }}>
     <div class="flex pb-4 border-b ">
         <div class="flex items-center space-x-2">
             <x-gravatar email="{{ $post->author->email }}" class="h-10 w-10 rounded-full"/>
@@ -10,7 +10,12 @@
             </div>
         </div>
         <div class="flex ml-auto">
-            <form method="POST" action="{{ route('posts.like', $post) }}">
+            <form method="POST" action="{{ route('posts.like', $post) }}"
+                  hx-push-url="false"
+                  hx-select="#post-{{ $post->id }}"
+                  hx-target="#post-{{ $post->id }}"
+                  hx-swap="outerHTML"
+            >
                 @csrf
                 <x-button type="submit" class="mr-2 gap-1">
                     @if($post->likers->contains(auth()->id()))
