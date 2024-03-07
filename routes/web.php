@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/likes', \App\Http\Controllers\LikeAction::class)->name('posts.like');
 
     Route::get('/{user:username}', \App\Http\Controllers\UserProfileAction::class)->name('users.profile');
+    Route::get('/{user:username}/likes', \App\Http\Controllers\UserProfileLikesAction::class)->name('users.likes');
 });
 
 Route::get('/auth/google', static fn () => Socialite::driver('google')->redirect())->name('auth.google');
