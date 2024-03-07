@@ -14,8 +14,13 @@ class GoogleAuthCallbackAction
         $user = User::query()->where('email', $googleUser->getEmail())->first();
 
         if (!$user) {
+            $username = Str::of($googleUser->user['given_name'])
+                ->append('-', Str::random(4))
+                ->lower();
+
             $user = new User([
                 'email' => $googleUser->getEmail(),
+                'username' => $username,
                 'name' => $googleUser->getName(),
                 'password' => Str::random(),
             ]);
