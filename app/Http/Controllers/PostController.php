@@ -26,7 +26,7 @@ class PostController extends Controller
         }
 
         return redirect()
-            ->route('dashboard')
+            ->route('home')
             ->with('success_message', 'Posted!');
     }
 

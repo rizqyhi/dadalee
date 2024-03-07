@@ -8,6 +8,15 @@ class HomeAction extends Controller
 {
     public function __invoke()
     {
-        return view('home');
+        if (auth()->guest()) {
+            return view('home');
+        }
+
+        $posts = Post::with(['author', 'likers:id'])
+            ->withCount(['replies', 'likers'])
+            ->latest('id')
+            ->simplePaginate(3);
+
+        return view('dashboard', compact('posts'));
     }
 }

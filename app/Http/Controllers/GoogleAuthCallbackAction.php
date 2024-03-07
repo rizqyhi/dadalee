@@ -25,6 +25,6 @@ class GoogleAuthCallbackAction
 
         auth()->login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
 }

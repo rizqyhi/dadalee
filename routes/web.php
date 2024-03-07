@@ -15,12 +15,9 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', \App\Http\Controllers\HomeAction::class)
-    ->middleware('guest')
-    ->name('home');
+Route::get('/', \App\Http\Controllers\HomeAction::class)->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', \App\Http\Controllers\DashboardAction::class)->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -28,8 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/likes', \App\Http\Controllers\LikeAction::class)->name('posts.like');
 });
 
-Route::get('/auth/google', static fn () => Socialite::driver('google')->redirect())
-    ->name('auth.google');
+Route::get('/auth/google', static fn () => Socialite::driver('google')->redirect())->name('auth.google');
 Route::get('/auth/callback', \App\Http\Controllers\GoogleAuthCallbackAction::class);
 
 require __DIR__.'/auth.php';
